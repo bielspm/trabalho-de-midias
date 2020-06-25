@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- css do bootstrap -->
+  <link rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+  <!-- material icons -->      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- meu css --> 
+  <link rel='stylesheet' type="text/css" href='{% static "css/list_upload.css" %}'>
+  <script src='{% static "js/home_page.js" %}'></script>
+  <!-- font awesome -->  
+  <script src="https://kit.fontawesome.com/fae4d68d9f.js"
+          crossorigin="anonymous">
+  </script>
+  <!-- jquery --> 
+  <script src='{% static "js/jquery/dist/jquery.js" %}'></script>
+  <title>Midia Store</title>
+  <style>
+      html,body {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          height: 100%;
+      }
+      li,ul {
+        margin: 0;
+        padding: 0;
+      }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-light bg-success">
+    <a class="navbar-brand" href="{% url 'main' %}">
+        <h3 class="text-white">MidiaStore</h3>
+    </a>
+    <span class="navbar-text">
+        <a href="{% url 'store' %}" class="btn btn-warning mx-1">Fazer um registro</a>
+        <a href="{% url 'index' %}" class="btn btn-warning mx-1">Listar registros</a>
+    </span>
+</nav>
+<div class="main">
+
+    <div class="" id="header">
+        <h1 class="text-muted text-center py-3 border-bottom">Registros</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-2 p-4 border-right d-flex flex-column align-items-end" id="div-filtros">
+            <div class="pb-3">
+                <labe>Ordenar</labe>
+                <select>
+                    <option>---</option>
+                    <option>mais antigo</option>
+                    <option>mais recente</option>
+                    <option>nome</option>
+                </select>
+            </div>
+            <form method="GET" action=""> 
+                <p>Tipo de midia</p>
+                    <ul>
+                    {% for tipo_midia in tipo_midias %}
+                        <li><input class="" name='tipo_midia' type="checkbox" value="{{ tipo_midia.tipo }}"><label>{{ tipo_midia.tipo }}</label></li>
+                    {% endfor %}
+                    </ul>
+                <p>Tipo de arquivo</p>
+                    <ul>
+                    {% for tipo_arquivo in tipo_arquivos %}
+                        <li><input class="" name='tipo_arquivo' type="checkbox" value="{{ tipo_midia.tipo }}"><label>{{ tipo_arquivo.tipo }}</label></li>
+                    {% endfor %}
+                    </ul>
+                <button class="text-left" type="submit">Filtrar</button>
+            </form>
+        </div>
+
+        <div class="col d-flex flex-row justify-content-start">
+            {% for upload in uploads %}
+                <div class="card m-3" style="width: 18rem;">
+                    
+                    <div class="card-body">
+                        <a href="{% url 'show' upload.id %}" class="card-title">{{ upload.nome }}</a>
+                        <p class="card-text">{{ upload.descricao }}</p>
+                        <a href="{% url 'edit' upload.id  %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'delete' upload.id %}" class="btn btn-primary">Excluir</a>
+                    </div>
+                </div>
+                {% empty %}
+                    <p>Desculpe, ainda não há nenhum registro!!</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+</html>

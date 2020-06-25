@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+.f-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.f-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.f-justify-center {
+    justify-content: center;
+    background-color: red;
+}
+
+.f-align-center {
+    align-items: center;
+    background-color: red;
+}
